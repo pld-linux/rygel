@@ -7,6 +7,7 @@ Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/rygel/0.20/%{name}-%{version}.tar.xz
 # Source0-md5:	7583935dd8e60b5db0d73db99f2258a6
 Source1:	git-version-gen
+Patch0:		gtk-doc.patch
 URL:		http://live.gnome.org/Rygel
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1.11.1
@@ -54,6 +55,7 @@ Pliki nagłówkowe rygel.
 
 %prep
 %setup -q
+%patch0 -p1
 #install -m755 %{SOURCE1} build-aux/git-version-gen
 
 %build
@@ -66,8 +68,7 @@ Pliki nagłówkowe rygel.
 %configure \
 	--enable-gst-launch-plugin \
 	--enable-mediathek-plugin \
-	--disable-silent-rules \
-	--with-html-dir=%{_gtkdocdir}
+	--disable-silent-rules
 
 %{__make}
 
