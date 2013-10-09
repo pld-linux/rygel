@@ -66,7 +66,9 @@ Pliki nagłówkowe rygel.
 %configure \
 	--enable-gst-launch-plugin \
 	--enable-mediathek-plugin \
-	--disable-silent-rules
+	--disable-silent-rules \
+	--with-html-dir=%{_gtkdocdir}
+
 %{__make}
 
 %install
@@ -159,5 +161,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/vala/vapi/rygel-server-2.0.deps
 %{_datadir}/vala/vapi/rygel-server-2.0.vapi
 # apidocs
-/usr/share/gtk-doc/html/librygel-core
-/usr/share/gtk-doc/html/librygel-renderer
+%{_gtkdocdir}/librygel-core
+%{_gtkdocdir}/librygel-renderer
