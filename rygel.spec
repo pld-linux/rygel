@@ -2,7 +2,7 @@ Summary:	Rygel - collection of DLNA (UPnP AV) services
 Summary(pl.UTF-8):	Rygel - zbiór usług DLNA (UPnP AV)
 Name:		rygel
 Version:	0.22.0
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/rygel/0.22/%{name}-%{version}.tar.xz
@@ -29,15 +29,15 @@ BuildRequires:	libsoup-devel >= 2.42.0
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libunistring-devel
 BuildRequires:	libuuid-devel >= 1.41.3
-BuildRequires:	libxslt-progs
 BuildRequires:	libxml2-devel >= 1:2.7
+BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
 BuildRequires:	sqlite3-devel >= 3.5
+BuildRequires:	tracker-devel >= 1.0
 BuildRequires:	vala >= 2:0.22.0
 BuildRequires:	vala-gupnp >= 0.19.0
 BuildRequires:	vala-gupnp-av >= 0.12.4
 BuildRequires:	valadoc >= 0.2
-BuildRequires:	tracker-devel >= 1.0
 Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
@@ -86,6 +86,9 @@ Pliki nagłówkowe bibliotek Rygel.
 Summary:	API documentation for Rygel libraries
 Summary(pl.UTF-8):	Dokumentacja API bibliotek Rygel
 Group:		Documentation
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 API documentation for Rygel libraries.
@@ -99,9 +102,9 @@ Summary(pl.UTF-8):	API języka Vala do bibliotek Rygel
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	vala >= 2:0.22.0
-Requires:	vala-libgee >= 0.8.0
 Requires:	vala-gupnp >= 0.19.0
 Requires:	vala-gupnp-av >= 0.12.4
+Requires:	vala-libgee >= 0.8.0
 
 %description -n vala-rygel
 Vala API for Rygel libraries.
