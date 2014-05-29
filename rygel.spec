@@ -1,12 +1,12 @@
 Summary:	Rygel - collection of DLNA (UPnP AV) services
 Summary(pl.UTF-8):	Rygel - zbiór usług DLNA (UPnP AV)
 Name:		rygel
-Version:	0.22.1
+Version:	0.22.2
 Release:	1
 License:	LGPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/rygel/0.22/%{name}-%{version}.tar.xz
-# Source0-md5:	07076ed41ed38eb39f7e19b07e1eaf32
+# Source0-md5:	603be5abe2d03ae4b1e681c3ebccceb9
 Source1:	git-version-gen
 Patch0:		gtk-doc.patch
 Patch1:		%{name}-valadoc-workaround.patch
@@ -25,7 +25,7 @@ BuildRequires:	gupnp-dlna-devel >= 0.9.4
 BuildRequires:	gupnp-dlna-gst-devel >= 0.9.4
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libgee-devel >= 0.8.0
-BuildRequires:	libsoup-devel >= 2.42.0
+BuildRequires:	libsoup-devel >= 2.44.0
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libunistring-devel
 BuildRequires:	libuuid-devel >= 1.41.3
@@ -50,7 +50,7 @@ Requires:	gupnp-av >= 0.12.4
 Requires:	gupnp-dlna >= 0.9.4
 Requires:	gupnp-dlna-gst >= 0.9.4
 Requires:	libgee >= 0.8.0
-Requires:	libsoup >= 2.42.0
+Requires:	libsoup >= 2.44.0
 Requires:	libuuid >= 1.41.3
 Requires:	libxml2 >= 1:2.7
 Requires:	sqlite3 >= 3.5
