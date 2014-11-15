@@ -1,12 +1,12 @@
 Summary:	Rygel - collection of DLNA (UPnP AV) services
 Summary(pl.UTF-8):	Rygel - zbiór usług DLNA (UPnP AV)
 Name:		rygel
-Version:	0.22.3
-Release:	3
+Version:	0.24.2
+Release:	1
 License:	LGPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/rygel/0.22/%{name}-%{version}.tar.xz
-# Source0-md5:	0c214696a5f586fdf675014373564ee0
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/rygel/0.24/%{name}-%{version}.tar.xz
+# Source0-md5:	445a3f7afdacdac7f6debe4b7f0bea5d
 Source1:	git-version-gen
 Patch0:		gtk-doc.patch
 URL:		http://live.gnome.org/Rygel
@@ -14,6 +14,7 @@ BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11.1
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.34.0
+BuildRequires:	gobject-introspection-devel >= 1.33.4
 BuildRequires:	gssdp-devel >= 0.13.0
 BuildRequires:	gstreamer-devel >= 1.0.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0.0
@@ -24,6 +25,7 @@ BuildRequires:	gupnp-dlna-devel >= 0.9.4
 BuildRequires:	gupnp-dlna-gst-devel >= 0.9.4
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libgee-devel >= 0.8.0
+BuildRequires:	libmediaart-devel >= 0.5.0
 BuildRequires:	libsoup-devel >= 2.44.0
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libunistring-devel
@@ -36,6 +38,7 @@ BuildRequires:	tracker-devel >= 1.0
 BuildRequires:	vala >= 2:0.22.0
 BuildRequires:	vala-gupnp >= 0.19.0
 BuildRequires:	vala-gupnp-av >= 0.12.4
+BuildRequires:	vala-libmediaart >= 0.5.0
 BuildRequires:	valadoc >= 0.2
 Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	gtk-update-icon-cache
@@ -49,6 +52,7 @@ Requires:	gupnp-av >= 0.12.4
 Requires:	gupnp-dlna >= 0.9.4
 Requires:	gupnp-dlna-gst >= 0.9.4
 Requires:	libgee >= 0.8.0
+Requires:	libmediaart >= 0.5.0
 Requires:	libsoup >= 2.44.0
 Requires:	libuuid >= 1.41.3
 Requires:	libxml2 >= 1:2.7
@@ -137,7 +141,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/rygel-2.2/*/*.la \
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/rygel-2.4/*/*.la \
 	$RPM_BUILD_ROOT%{_libdir}/*.la
 
 %find_lang %{name}
@@ -159,35 +163,38 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/rygel
 %attr(755,root,root) %{_bindir}/rygel-preferences
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/rygel.conf
-%attr(755,root,root) %{_libdir}/librygel-core-2.2.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/librygel-core-2.2.so.2
-%attr(755,root,root) %{_libdir}/librygel-renderer-2.2.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/librygel-renderer-2.2.so.2
-%attr(755,root,root) %{_libdir}/librygel-renderer-gst-2.2.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/librygel-renderer-gst-2.2.so.2
-%attr(755,root,root) %{_libdir}/librygel-server-2.2.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/librygel-server-2.2.so.2
-%dir %{_libdir}/rygel-2.2
-%dir %{_libdir}/rygel-2.2/engines
-%attr(755,root,root) %{_libdir}/rygel-2.2/engines/librygel-media-engine-gst.so
-%{_libdir}/rygel-2.2/engines/media-engine-gst.plugin
-%attr(755,root,root) %{_libdir}/rygel-2.2/engines/librygel-media-engine-simple.so
-%{_libdir}/rygel-2.2/engines/media-engine-simple.plugin
-%dir %{_libdir}/rygel-2.2/plugins
-%attr(755,root,root) %{_libdir}/rygel-2.2/plugins/librygel-external.so
-%{_libdir}/rygel-2.2/plugins/external.plugin
-%attr(755,root,root) %{_libdir}/rygel-2.2/plugins/librygel-gst-launch.so
-%{_libdir}/rygel-2.2/plugins/gst-launch.plugin
-%attr(755,root,root) %{_libdir}/rygel-2.2/plugins/librygel-media-export.so
-%{_libdir}/rygel-2.2/plugins/media-export.plugin
-%attr(755,root,root) %{_libdir}/rygel-2.2/plugins/librygel-mediathek.so
-%{_libdir}/rygel-2.2/plugins/mediathek.plugin
-%attr(755,root,root) %{_libdir}/rygel-2.2/plugins/librygel-mpris.so
-%{_libdir}/rygel-2.2/plugins/mpris.plugin
-%attr(755,root,root) %{_libdir}/rygel-2.2/plugins/librygel-tracker.so
-%{_libdir}/rygel-2.2/plugins/tracker.plugin
-%attr(755,root,root) %{_libdir}/rygel-2.2/plugins/librygel-playbin.so
-%{_libdir}/rygel-2.2/plugins/playbin.plugin
+%attr(755,root,root) %{_libdir}/librygel-core-2.4.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/librygel-core-2.4.so.2
+%attr(755,root,root) %{_libdir}/librygel-renderer-2.4.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/librygel-renderer-2.4.so.2
+%attr(755,root,root) %{_libdir}/librygel-renderer-gst-2.4.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/librygel-renderer-gst-2.4.so.2
+%attr(755,root,root) %{_libdir}/librygel-server-2.4.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/librygel-server-2.4.so.2
+%{_libdir}/girepository-1.0/RygelCore-2.4.typelib
+%{_libdir}/girepository-1.0/RygelRenderer-2.4.typelib
+%{_libdir}/girepository-1.0/RygelServer-2.4.typelib
+%dir %{_libdir}/rygel-2.4
+%dir %{_libdir}/rygel-2.4/engines
+%attr(755,root,root) %{_libdir}/rygel-2.4/engines/librygel-media-engine-gst.so
+%{_libdir}/rygel-2.4/engines/media-engine-gst.plugin
+%attr(755,root,root) %{_libdir}/rygel-2.4/engines/librygel-media-engine-simple.so
+%{_libdir}/rygel-2.4/engines/media-engine-simple.plugin
+%dir %{_libdir}/rygel-2.4/plugins
+%attr(755,root,root) %{_libdir}/rygel-2.4/plugins/librygel-external.so
+%{_libdir}/rygel-2.4/plugins/external.plugin
+%attr(755,root,root) %{_libdir}/rygel-2.4/plugins/librygel-gst-launch.so
+%{_libdir}/rygel-2.4/plugins/gst-launch.plugin
+%attr(755,root,root) %{_libdir}/rygel-2.4/plugins/librygel-media-export.so
+%{_libdir}/rygel-2.4/plugins/media-export.plugin
+%attr(755,root,root) %{_libdir}/rygel-2.4/plugins/librygel-mediathek.so
+%{_libdir}/rygel-2.4/plugins/mediathek.plugin
+%attr(755,root,root) %{_libdir}/rygel-2.4/plugins/librygel-mpris.so
+%{_libdir}/rygel-2.4/plugins/mpris.plugin
+%attr(755,root,root) %{_libdir}/rygel-2.4/plugins/librygel-tracker.so
+%{_libdir}/rygel-2.4/plugins/tracker.plugin
+%attr(755,root,root) %{_libdir}/rygel-2.4/plugins/librygel-playbin.so
+%{_libdir}/rygel-2.4/plugins/playbin.plugin
 %{_desktopdir}/rygel-preferences.desktop
 %{_desktopdir}/rygel.desktop
 %{_datadir}/dbus-1/services/org.gnome.Rygel1.service
@@ -198,30 +205,33 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/librygel-core-2.2.so
-%attr(755,root,root) %{_libdir}/librygel-renderer-2.2.so
-%attr(755,root,root) %{_libdir}/librygel-renderer-gst-2.2.so
-%attr(755,root,root) %{_libdir}/librygel-server-2.2.so
-%dir %{_includedir}/rygel-2.2
-%{_includedir}/rygel-2.2/rygel-core.h
-%{_includedir}/rygel-2.2/rygel-renderer-gst.h
-%{_includedir}/rygel-2.2/rygel-renderer.h
-%{_includedir}/rygel-2.2/rygel-server.h
-%{_pkgconfigdir}/rygel-core-2.2.pc
-%{_pkgconfigdir}/rygel-renderer-2.2.pc
-%{_pkgconfigdir}/rygel-renderer-gst-2.2.pc
-%{_pkgconfigdir}/rygel-server-2.2.pc
+%attr(755,root,root) %{_libdir}/librygel-core-2.4.so
+%attr(755,root,root) %{_libdir}/librygel-renderer-2.4.so
+%attr(755,root,root) %{_libdir}/librygel-renderer-gst-2.4.so
+%attr(755,root,root) %{_libdir}/librygel-server-2.4.so
+%{_datadir}/gir-1.0/RygelCore-2.4.gir
+%{_datadir}/gir-1.0/RygelRenderer-2.4.gir
+%{_datadir}/gir-1.0/RygelServer-2.4.gir
+%dir %{_includedir}/rygel-2.4
+%{_includedir}/rygel-2.4/rygel-core.h
+%{_includedir}/rygel-2.4/rygel-renderer-gst.h
+%{_includedir}/rygel-2.4/rygel-renderer.h
+%{_includedir}/rygel-2.4/rygel-server.h
+%{_pkgconfigdir}/rygel-core-2.4.pc
+%{_pkgconfigdir}/rygel-renderer-2.4.pc
+%{_pkgconfigdir}/rygel-renderer-gst-2.4.pc
+%{_pkgconfigdir}/rygel-server-2.4.pc
 
 %files -n vala-rygel
 %defattr(644,root,root,755)
-%{_datadir}/vala/vapi/rygel-core-2.2.deps
-%{_datadir}/vala/vapi/rygel-core-2.2.vapi
-%{_datadir}/vala/vapi/rygel-renderer-2.2.deps
-%{_datadir}/vala/vapi/rygel-renderer-2.2.vapi
-%{_datadir}/vala/vapi/rygel-renderer-gst-2.2.deps
-%{_datadir}/vala/vapi/rygel-renderer-gst-2.2.vapi
-%{_datadir}/vala/vapi/rygel-server-2.2.deps
-%{_datadir}/vala/vapi/rygel-server-2.2.vapi
+%{_datadir}/vala/vapi/rygel-core-2.4.deps
+%{_datadir}/vala/vapi/rygel-core-2.4.vapi
+%{_datadir}/vala/vapi/rygel-renderer-2.4.deps
+%{_datadir}/vala/vapi/rygel-renderer-2.4.vapi
+%{_datadir}/vala/vapi/rygel-renderer-gst-2.4.deps
+%{_datadir}/vala/vapi/rygel-renderer-gst-2.4.vapi
+%{_datadir}/vala/vapi/rygel-server-2.4.deps
+%{_datadir}/vala/vapi/rygel-server-2.4.vapi
 
 %files apidocs
 %defattr(644,root,root,755)
