@@ -38,6 +38,7 @@ BuildRequires:	tracker-devel >= 1.0
 BuildRequires:	vala >= 2:0.22.0
 BuildRequires:	vala-gupnp >= 0.19.0
 BuildRequires:	vala-gupnp-av >= 0.12.4
+BuildRequires:	vala-libgee >= 0.8.0
 BuildRequires:	vala-libmediaart >= 0.5.0
 BuildRequires:	valadoc >= 0.2
 Requires(post,postun):	/sbin/ldconfig
