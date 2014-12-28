@@ -12,7 +12,7 @@ Patch0:		gtk-doc.patch
 URL:		http://live.gnome.org/Rygel
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11.1
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.34.0
 BuildRequires:	gobject-introspection-devel >= 1.33.4
 BuildRequires:	gssdp-devel >= 0.13.0
