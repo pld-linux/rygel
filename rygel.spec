@@ -1,31 +1,32 @@
 Summary:	Rygel - collection of DLNA (UPnP AV) services
 Summary(pl.UTF-8):	Rygel - zbiór usług DLNA (UPnP AV)
 Name:		rygel
-Version:	0.26.1
+Version:	0.28.1
 Release:	1
 License:	LGPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/rygel/0.26/%{name}-%{version}.tar.xz
-# Source0-md5:	f182d54913a528bb5b4fb2f291aca0fc
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/rygel/0.28/%{name}-%{version}.tar.xz
+# Source0-md5:	c56578fd966dc07a44405bafeba785ab
 Source1:	git-version-gen
 Patch0:		gtk-doc.patch
 URL:		http://live.gnome.org/Rygel
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11.1
 BuildRequires:	gettext-tools
-BuildRequires:	glib2-devel >= 1:2.34.0
+BuildRequires:	glib2-devel >= 1:2.40.0
 BuildRequires:	gobject-introspection-devel >= 1.33.4
 BuildRequires:	gssdp-devel >= 0.13.0
 BuildRequires:	gstreamer-devel >= 1.0.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0.0
 BuildRequires:	gtk+3-devel >= 3.0.0
+BuildRequires:	gtk-doc >= 1.0
 BuildRequires:	gupnp-av-devel >= 0.12.4
-BuildRequires:	gupnp-devel >= 0.19.0
+BuildRequires:	gupnp-devel >= 0.20.14
 BuildRequires:	gupnp-dlna-devel >= 0.9.4
 BuildRequires:	gupnp-dlna-gst-devel >= 0.9.4
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libgee-devel >= 0.8.0
-BuildRequires:	libmediaart-devel >= 0.7.0
+BuildRequires:	libmediaart2-devel >= 0.7.0
 BuildRequires:	libsoup-devel >= 2.44.0
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libunistring-devel
@@ -35,25 +36,25 @@ BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
 BuildRequires:	sqlite3-devel >= 3.5
 BuildRequires:	tracker-devel >= 1.0
-BuildRequires:	vala >= 2:0.22.0
-BuildRequires:	vala-gupnp >= 0.19.0
+BuildRequires:	vala >= 2:0.24.0
+BuildRequires:	vala-gupnp >= 0.20.14
 BuildRequires:	vala-gupnp-av >= 0.12.4
 BuildRequires:	vala-libgee >= 0.8.0
-BuildRequires:	vala-libmediaart >= 0.7.0
+BuildRequires:	vala-libmediaart2 >= 0.7.0
 BuildRequires:	valadoc >= 0.2
 Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
-Requires:	glib2 >= 1:2.34.0
+Requires:	glib2 >= 1:2.40.0
 Requires:	gssdp >= 0.13.0
 Requires:	gstreamer >= 1.0.0
 Requires:	gtk+3 >= 3.0.0
-Requires:	gupnp >= 0.19.0
+Requires:	gupnp >= 0.20.14
 Requires:	gupnp-av >= 0.12.4
 Requires:	gupnp-dlna >= 0.9.4
 Requires:	gupnp-dlna-gst >= 0.9.4
 Requires:	libgee >= 0.8.0
-Requires:	libmediaart >= 0.7.0
+Requires:	libmediaart2 >= 0.7.0
 Requires:	libsoup >= 2.44.0
 Requires:	libuuid >= 1.41.3
 Requires:	libxml2 >= 1:2.7
@@ -74,7 +75,7 @@ Summary:	Rygel header files
 Summary(pl.UTF-8):	Pliki nagłówkowe bibliotek Rygel
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.34.0
+Requires:	glib2-devel >= 1:2.40.0
 Requires:	gstreamer-devel >= 1.0.0
 Requires:	gupnp-av-devel >= 0.12.4
 Requires:	libgee-devel >= 0.8.0
@@ -105,8 +106,8 @@ Summary:	Vala API for Rygel libraries
 Summary(pl.UTF-8):	API języka Vala do bibliotek Rygel
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
-Requires:	vala >= 2:0.22.0
-Requires:	vala-gupnp >= 0.19.0
+Requires:	vala >= 2:0.24.0
+Requires:	vala-gupnp >= 0.20.14
 Requires:	vala-gupnp-av >= 0.12.4
 Requires:	vala-libgee >= 0.8.0
 
@@ -166,6 +167,8 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/rygel.conf
 %attr(755,root,root) %{_libdir}/librygel-core-2.6.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/librygel-core-2.6.so.2
+%attr(755,root,root) %{_libdir}/librygel-db-2.6.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/librygel-db-2.6.so.2
 %attr(755,root,root) %{_libdir}/librygel-renderer-2.6.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/librygel-renderer-2.6.so.2
 %attr(755,root,root) %{_libdir}/librygel-renderer-gst-2.6.so.*.*.*
@@ -178,6 +181,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/girepository-1.0/RygelRenderer-2.6.typelib
 %{_libdir}/girepository-1.0/RygelRendererGst-2.6.typelib
 %{_libdir}/girepository-1.0/RygelServer-2.6.typelib
+%dir %{_libexecdir}/rygel
+%attr(755,root,root) %{_libexecdir}/rygel/mx-extract
 %dir %{_libdir}/rygel-2.6
 %dir %{_libdir}/rygel-2.6/engines
 %attr(755,root,root) %{_libdir}/rygel-2.6/engines/librygel-media-engine-gst.so
@@ -212,6 +217,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/librygel-core-2.6.so
+%attr(755,root,root) %{_libdir}/librygel-db-2.6.so
 %attr(755,root,root) %{_libdir}/librygel-renderer-2.6.so
 %attr(755,root,root) %{_libdir}/librygel-renderer-gst-2.6.so
 %attr(755,root,root) %{_libdir}/librygel-ruih-2.0.so
@@ -222,6 +228,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gir-1.0/RygelServer-2.6.gir
 %dir %{_includedir}/rygel-2.6
 %{_includedir}/rygel-2.6/rygel-core.h
+%{_includedir}/rygel-2.6/rygel-db.h
 %{_includedir}/rygel-2.6/rygel-renderer-gst.h
 %{_includedir}/rygel-2.6/rygel-renderer.h
 %{_includedir}/rygel-2.6/rygel-ruih.h
@@ -235,6 +242,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_datadir}/vala/vapi/rygel-core-2.6.deps
 %{_datadir}/vala/vapi/rygel-core-2.6.vapi
+%{_datadir}/vala/vapi/rygel-db-2.6.deps
+%{_datadir}/vala/vapi/rygel-db-2.6.vapi
 %{_datadir}/vala/vapi/rygel-renderer-2.6.deps
 %{_datadir}/vala/vapi/rygel-renderer-2.6.vapi
 %{_datadir}/vala/vapi/rygel-renderer-gst-2.6.deps
