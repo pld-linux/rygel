@@ -1,30 +1,28 @@
 Summary:	Rygel - collection of DLNA (UPnP AV) services
 Summary(pl.UTF-8):	Rygel - zbiór usług DLNA (UPnP AV)
 Name:		rygel
-Version:	0.36.0
+Version:	0.38.2
 Release:	1
 License:	LGPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/rygel/0.36/%{name}-%{version}.tar.xz
-# Source0-md5:	5fb557fcd6635ecb065e3977b99aff89
-Source1:	git-version-gen
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/rygel/0.38/%{name}-%{version}.tar.xz
+# Source0-md5:	1cd6c49da750bd7c28258665ab33084c
 Patch0:		gtk-doc.patch
-Patch1:		xmls-ns.patch
 URL:		https://wiki.gnome.org/Projects/Rygel
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11.1
-BuildRequires:	docbook-style-xsl
+BuildRequires:	docbook-style-xsl-nons
 BuildRequires:	gdk-pixbuf2-devel >= 2.0
 BuildRequires:	gettext-tools >= 0.19.7
-BuildRequires:	glib2-devel >= 1:2.40.0
+BuildRequires:	glib2-devel >= 1:2.44.0
 BuildRequires:	gobject-introspection-devel >= 1.33.4
-BuildRequires:	gssdp-devel >= 0.13.0
-BuildRequires:	gstreamer-devel >= 1.0.0
-BuildRequires:	gstreamer-plugins-base-devel >= 1.0.0
-BuildRequires:	gtk+3-devel >= 3.0.0
+BuildRequires:	gssdp-devel >= 1.2.0
+BuildRequires:	gstreamer-devel >= 1.12
+BuildRequires:	gstreamer-plugins-base-devel >= 1.12
+BuildRequires:	gtk+3-devel >= 3.22
 BuildRequires:	gtk-doc >= 1.0
 BuildRequires:	gupnp-av-devel >= 0.12.8
-BuildRequires:	gupnp-devel >= 0.20.14
+BuildRequires:	gupnp-devel >= 1.2.0
 BuildRequires:	gupnp-dlna-devel >= 0.9.4
 BuildRequires:	gupnp-dlna-gst-devel >= 0.9.4
 BuildRequires:	libgee-devel >= 0.8.0
@@ -38,9 +36,9 @@ BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.682
 BuildRequires:	sqlite3-devel >= 3.5
-BuildRequires:	tracker-devel >= 1.0
-BuildRequires:	vala >= 2:0.24.0
-BuildRequires:	vala-gupnp >= 0.20.14
+BuildRequires:	tracker-devel >= 2.0
+BuildRequires:	vala >= 2:0.36.0
+BuildRequires:	vala-gupnp >= 1.2.0
 BuildRequires:	vala-gupnp-av >= 0.12.8
 BuildRequires:	vala-libgee >= 0.8.0
 BuildRequires:	vala-libmediaart2 >= 0.7.0
@@ -49,13 +47,13 @@ Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	gstreamer >= 1.0.0
-Requires:	gtk+3 >= 3.0.0
+Requires:	gstreamer >= 1.12
+Requires:	gtk+3 >= 3.22
 Requires:	gupnp-dlna >= 0.9.4
 Requires:	gupnp-dlna-gst >= 0.9.4
 Requires:	libuuid >= 1.41.3
 Requires:	systemd-units >= 38
-Requires:	tracker-libs >= 1.0
+Requires:	tracker-libs >= 2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -70,9 +68,9 @@ zaimplementowany poprzez mechanizm wtyczek.
 Summary:	Rygel shared libraries
 Summary(pl.UTF-8):	Biblioteki współdzielone Rygela
 Group:		Libraries
-Requires:	glib2 >= 1:2.40.0
-Requires:	gssdp >= 0.13.0
-Requires:	gupnp >= 0.20.14
+Requires:	glib2 >= 1:2.44.0
+Requires:	gssdp >= 1.2.0
+Requires:	gupnp >= 1.2.0
 Requires:	gupnp-av >= 0.12.8
 Requires:	libgee >= 0.8.0
 Requires:	libmediaart2 >= 0.7.0
@@ -92,8 +90,8 @@ Summary:	Rygel header files
 Summary(pl.UTF-8):	Pliki nagłówkowe bibliotek Rygel
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.40.0
-Requires:	gstreamer-devel >= 1.0.0
+Requires:	glib2-devel >= 1:2.44.0
+Requires:	gstreamer-devel >= 1.12
 Requires:	gupnp-av-devel >= 0.12.8
 Requires:	libgee-devel >= 0.8.0
 Requires:	libuuid-devel >= 1.41.3
@@ -123,8 +121,8 @@ Summary:	Vala API for Rygel libraries
 Summary(pl.UTF-8):	API języka Vala do bibliotek Rygel
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
-Requires:	vala >= 2:0.24.0
-Requires:	vala-gupnp >= 0.20.14
+Requires:	vala >= 2:0.36.0
+Requires:	vala-gupnp >= 1.2.0
 Requires:	vala-gupnp-av >= 0.12.8
 Requires:	vala-libgee >= 0.8.0
 %if "%{_rpmversion}" >= "5"
@@ -140,8 +138,6 @@ API języka Vala do bibliotek Rygel.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-#install -m755 %{SOURCE1} build-aux/git-version-gen
 
 %build
 %{__gettextize}
@@ -182,7 +178,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO
+%doc AUTHORS ChangeLog NEWS README.md TODO
 %attr(755,root,root) %{_bindir}/rygel
 %attr(755,root,root) %{_bindir}/rygel-preferences
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/rygel.conf
@@ -261,6 +257,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/rygel-core-2.6.pc
 %{_pkgconfigdir}/rygel-renderer-2.6.pc
 %{_pkgconfigdir}/rygel-renderer-gst-2.6.pc
+%{_pkgconfigdir}/rygel-ruih-2.0.pc
 %{_pkgconfigdir}/rygel-server-2.6.pc
 
 %files -n vala-rygel
