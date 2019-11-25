@@ -1,12 +1,12 @@
 Summary:	Rygel - collection of DLNA (UPnP AV) services
 Summary(pl.UTF-8):	Rygel - zbiór usług DLNA (UPnP AV)
 Name:		rygel
-Version:	0.38.2
+Version:	0.38.3
 Release:	1
 License:	LGPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/rygel/0.38/%{name}-%{version}.tar.xz
-# Source0-md5:	1cd6c49da750bd7c28258665ab33084c
+# Source0-md5:	7f95401903a3f855b464d5152b9d4c07
 Patch0:		gtk-doc.patch
 URL:		https://wiki.gnome.org/Projects/Rygel
 BuildRequires:	autoconf >= 2.64
@@ -36,6 +36,7 @@ BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.682
 BuildRequires:	sqlite3-devel >= 3.5
+BuildRequires:	tar >= 1:1.22
 BuildRequires:	tracker-devel >= 2.0
 BuildRequires:	vala >= 2:0.36.0
 BuildRequires:	vala-gupnp >= 1.2.0
@@ -43,6 +44,7 @@ BuildRequires:	vala-gupnp-av >= 0.12.8
 BuildRequires:	vala-libgee >= 0.8.0
 BuildRequires:	vala-libmediaart2 >= 0.7.0
 BuildRequires:	valadoc >= 0.2
+BuildRequires:	xz
 Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
