@@ -2,12 +2,13 @@ Summary:	Rygel - collection of DLNA (UPnP AV) services
 Summary(pl.UTF-8):	Rygel - zbiór usług DLNA (UPnP AV)
 Name:		rygel
 Version:	0.38.3
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/rygel/0.38/%{name}-%{version}.tar.xz
 # Source0-md5:	7f95401903a3f855b464d5152b9d4c07
 Patch0:		gtk-doc.patch
+Patch1:		%{name}-pc.patch
 URL:		https://wiki.gnome.org/Projects/Rygel
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11.1
@@ -108,7 +109,7 @@ Pliki nagłówkowe bibliotek Rygel.
 Summary:	API documentation for Rygel libraries
 Summary(pl.UTF-8):	Dokumentacja API bibliotek Rygel
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -127,7 +128,7 @@ Requires:	vala >= 2:0.36.0
 Requires:	vala-gupnp >= 1.2.0
 Requires:	vala-gupnp-av >= 0.12.8
 Requires:	vala-libgee >= 0.8.0
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -140,6 +141,7 @@ API języka Vala do bibliotek Rygel.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__gettextize}
