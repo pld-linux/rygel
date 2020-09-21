@@ -1,11 +1,55 @@
---- rygel-0.20.0/doc/reference/doc-build.am~	2013-05-12 17:15:55.000000000 +0200
-+++ rygel-0.20.0/doc/reference/doc-build.am	2013-10-09 19:07:46.751738394 +0200
-@@ -77,7 +77,7 @@
+--- rygel-0.40.0/doc/reference/librygel-core/meson.build.orig	2020-09-13 23:58:05.023098200 +0200
++++ rygel-0.40.0/doc/reference/librygel-core/meson.build	2020-09-21 20:16:35.658638400 +0200
+@@ -49,7 +49,7 @@
  
+ if get_option('api-docs')
+     install_subdir('gtkdoc/html',
+-                   install_dir : join_paths(get_option('datadir'), 'gtk-doc/html/librygel-core'),
++                   install_dir : join_paths(get_option('datadir'), 'doc/gtk-doc/html/librygel-core'),
+                    strip_directory : true)
+ endif
+ endif
+--- rygel-0.40.0/doc/reference/librygel-db/meson.build.orig	2020-09-13 23:58:05.023098200 +0200
++++ rygel-0.40.0/doc/reference/librygel-db/meson.build	2020-09-21 20:16:46.621912341 +0200
+@@ -56,7 +56,7 @@
+ 
+ if get_option('api-docs')
+     install_subdir('gtkdoc/html',
+-                   install_dir : join_paths(get_option('datadir'), 'gtk-doc/html/librygel-db'),
++                   install_dir : join_paths(get_option('datadir'), 'doc/gtk-doc/html/librygel-db'),
+                    strip_directory : true)
  endif
  
--RYGEL_GTKDOC_INSTALL_DIR = $(DESTDIR)$(datadir)/gtk-doc/html/lib$(RYGEL_DOCBUILD_MODULE)
-+RYGEL_GTKDOC_INSTALL_DIR = $(DESTDIR)$(datadir)/doc/gtk-doc/html/lib$(RYGEL_DOCBUILD_MODULE)
- 
- uninstall-hook:
- 	rm -rf $(RYGEL_GTKDOC_INSTALL_DIR)
+--- rygel-0.40.0/doc/reference/librygel-renderer-gst/meson.build.orig	2020-09-13 23:58:05.023098200 +0200
++++ rygel-0.40.0/doc/reference/librygel-renderer-gst/meson.build	2020-09-21 20:16:56.948523063 +0200
+@@ -60,7 +60,7 @@
+ )
+ if get_option('api-docs')
+     install_subdir('gtkdoc/html',
+-                   install_dir : join_paths(get_option('datadir'), 'gtk-doc/html/librygel-renderer-gst'),
++                   install_dir : join_paths(get_option('datadir'), 'doc/gtk-doc/html/librygel-renderer-gst'),
+                    strip_directory : true)
+ endif
+ endif
+--- rygel-0.40.0/doc/reference/librygel-renderer/meson.build.orig	2020-09-13 23:58:05.023098200 +0200
++++ rygel-0.40.0/doc/reference/librygel-renderer/meson.build	2020-09-21 20:17:07.495132594 +0200
+@@ -54,7 +54,7 @@
+ )
+ if get_option('api-docs')
+     install_subdir('gtkdoc/html',
+-                   install_dir : join_paths(get_option('datadir'), 'gtk-doc/html/librygel-renderer'),
++                   install_dir : join_paths(get_option('datadir'), 'doc/gtk-doc/html/librygel-renderer'),
+                    strip_directory : true)
+ endif
+ endif
+--- rygel-0.40.0/doc/reference/librygel-server/meson.build.orig	2020-09-13 23:58:05.023098200 +0200
++++ rygel-0.40.0/doc/reference/librygel-server/meson.build	2020-09-21 20:17:17.021747651 +0200
+@@ -55,7 +55,7 @@
+ )
+ if get_option('api-docs')
+     install_subdir('gtkdoc/html',
+-                   install_dir : join_paths(get_option('datadir'), 'gtk-doc/html/librygel-server'),
++                   install_dir : join_paths(get_option('datadir'), 'doc/gtk-doc/html/librygel-server'),
+                    strip_directory : true)
+ endif
+ endif
