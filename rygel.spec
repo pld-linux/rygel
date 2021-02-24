@@ -6,12 +6,12 @@
 Summary:	Rygel - collection of DLNA (UPnP AV) services
 Summary(pl.UTF-8):	Rygel - zbiór usług DLNA (UPnP AV)
 Name:		rygel
-Version:	0.40.0
+Version:	0.40.1
 Release:	1
 License:	LGPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/rygel/0.40/%{name}-%{version}.tar.xz
-# Source0-md5:	8526d47477212f7b7e6a1495e9751997
+Source0:	https://download.gnome.org/sources/rygel/0.40/%{name}-%{version}.tar.xz
+# Source0-md5:	d86ea1458ee6fda890dec3cfbda94372
 Patch0:		gtk-doc.patch
 Patch1:		%{name}-pc.patch
 URL:		https://wiki.gnome.org/Projects/Rygel
@@ -40,7 +40,7 @@ BuildRequires:	libxslt-progs
 BuildRequires:	meson >= 0.50.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRequires:	sqlite3-devel >= 3.5
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	tracker-devel >= 2.0
@@ -119,9 +119,7 @@ Pliki nagłówkowe bibliotek Rygel.
 Summary:	API documentation for Rygel libraries
 Summary(pl.UTF-8):	Dokumentacja API bibliotek Rygel
 Group:		Documentation
-%if "%{_rpmversion}" >= "4.6"
-BuildArch:	noarch
-%endif
+%{?noarchpackage}
 
 %description apidocs
 API documentation for Rygel libraries.
@@ -138,9 +136,7 @@ Requires:	vala >= 2:0.40.10
 Requires:	vala-gupnp >= 1.2.0
 Requires:	vala-gupnp-av >= 0.12.8
 Requires:	vala-libgee >= 0.8.0
-%if "%{_rpmversion}" >= "4.6"
-BuildArch:	noarch
-%endif
+%{?noarchpackage}
 
 %description -n vala-rygel
 Vala API for Rygel libraries.
