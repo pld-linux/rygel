@@ -119,7 +119,7 @@ Pliki nagłówkowe bibliotek Rygel.
 Summary:	API documentation for Rygel libraries
 Summary(pl.UTF-8):	Dokumentacja API bibliotek Rygel
 Group:		Documentation
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description apidocs
 API documentation for Rygel libraries.
@@ -136,7 +136,7 @@ Requires:	vala >= 2:0.40.10
 Requires:	vala-gupnp >= 1.2.0
 Requires:	vala-gupnp-av >= 0.12.8
 Requires:	vala-libgee >= 0.8.0
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description -n vala-rygel
 Vala API for Rygel libraries.
