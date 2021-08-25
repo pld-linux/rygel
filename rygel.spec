@@ -1,4 +1,4 @@
-# TODO: split some plugins? (tracker2, tracker3, gstreamer?)
+# TODO: split some plugins? (gstreamer?)
 #
 # Conditional build:
 %bcond_without	apidocs	# API documentation
@@ -7,7 +7,7 @@ Summary:	Rygel - collection of DLNA (UPnP AV) services
 Summary(pl.UTF-8):	Rygel - zbiór usług DLNA (UPnP AV)
 Name:		rygel
 Version:	0.40.1
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/rygel/0.40/%{name}-%{version}.tar.xz
@@ -65,8 +65,6 @@ Requires:	gupnp-dlna >= 0.9.4
 Requires:	gupnp-dlna-gst >= 0.9.4
 Requires:	libuuid >= 1.41.3
 Requires:	systemd-units >= 38
-Requires:	tracker-libs >= 2.0
-Requires:	tracker3-libs >= 3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -144,6 +142,44 @@ Vala API for Rygel libraries.
 %description -n vala-rygel -l pl.UTF-8
 API języka Vala do bibliotek Rygel.
 
+%package plugins
+Summary:	Plugins for the Rygel media server
+Summary(pl.UTF-8):	Wtyczki dla serwera mediów Rygel
+Group:		X11/Applications
+Requires:	%{name} = %{version}-%{release}
+
+%description plugins
+Plugins for the Rygel UPnP/DLNA media server.
+
+%description plugins -l pl.UTF-8
+Wtyczki dla serwera mediów UPnP/DLNA Rygel
+
+%package plugin-tracker
+Summary:	tracker plugin for the Rygel media server
+Summary(pl.UTF-8):	Wtyczka tracker dla serwera mediów Rygel
+Group:		X11/Applications
+Requires:	%{name} = %{version}-%{release}
+Requires:	tracker-libs >= 2.0
+
+%description plugin-tracker
+Tracker plugin for the Rygel UPnP/DLNA media server.
+
+%description plugin-tracker -l pl.UTF-8
+Wtyczka tracker dla serwera mediów UPnP/DLNA Rygel
+
+%package plugin-tracker3
+Summary:	tracker3 plugin for the Rygel media server
+Summary(pl.UTF-8):	Wtyczka tracker3 dla serwera mediów Rygel
+Group:		X11/Applications
+Requires:	%{name} = %{version}-%{release}
+Requires:	tracker3-libs >= 3.0
+
+%description plugin-tracker3
+Tracker3 plugin for the Rygel UPnP/DLNA media server.
+
+%description plugin-tracker3 -l pl.UTF-8
+Wtyczka tracker3 dla serwera mediów UPnP/DLNA Rygel
+
 %prep
 %setup -q
 %patch0 -p1
@@ -191,6 +227,19 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/rygel-2.6/engines/media-engine-gst.plugin
 %attr(755,root,root) %{_libdir}/rygel-2.6/engines/librygel-media-engine-simple.so
 %{_libdir}/rygel-2.6/engines/media-engine-simple.plugin
+%{systemduserunitdir}/rygel.service
+%{_desktopdir}/rygel-preferences.desktop
+%{_desktopdir}/rygel.desktop
+%{_datadir}/dbus-1/services/org.gnome.Rygel1.service
+%{_datadir}/rygel
+%{_iconsdir}/hicolor/*x*/apps/rygel.png
+%{_iconsdir}/hicolor/scalable/apps/rygel.svg
+%{_iconsdir}/hicolor/scalable/apps/rygel-full.svg
+%{_mandir}/man1/rygel.1*
+%{_mandir}/man5/rygel.conf.5*
+
+%files plugins
+%defattr(644,root,root,755)
 %dir %{_libdir}/rygel-2.6/plugins
 %attr(755,root,root) %{_libdir}/rygel-2.6/plugins/librygel-external.so
 %{_libdir}/rygel-2.6/plugins/external.plugin
@@ -206,20 +255,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/rygel-2.6/plugins/playbin.plugin
 %attr(755,root,root) %{_libdir}/rygel-2.6/plugins/librygel-ruih.so
 %{_libdir}/rygel-2.6/plugins/ruih.plugin
+
+%files plugin-tracker
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/rygel-2.6/plugins/librygel-tracker.so
 %{_libdir}/rygel-2.6/plugins/tracker.plugin
+
+%files plugin-tracker3
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/rygel-2.6/plugins/librygel-tracker3.so
 %{_libdir}/rygel-2.6/plugins/tracker3.plugin
-%{systemduserunitdir}/rygel.service
-%{_desktopdir}/rygel-preferences.desktop
-%{_desktopdir}/rygel.desktop
-%{_datadir}/dbus-1/services/org.gnome.Rygel1.service
-%{_datadir}/rygel
-%{_iconsdir}/hicolor/*x*/apps/rygel.png
-%{_iconsdir}/hicolor/scalable/apps/rygel.svg
-%{_iconsdir}/hicolor/scalable/apps/rygel-full.svg
-%{_mandir}/man1/rygel.1*
-%{_mandir}/man5/rygel.conf.5*
 
 %files libs
 %defattr(644,root,root,755)
