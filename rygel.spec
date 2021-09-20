@@ -52,6 +52,7 @@ BuildRequires:	vala-gupnp-dlna >= 0.9.4
 BuildRequires:	vala-gupnp-dlna-gst >= 0.9.4
 BuildRequires:	vala-libgee >= 0.8.0
 BuildRequires:	vala-libmediaart2 >= 0.7.0
+BuildRequires:	vala-tracker3 >= 3.0
 BuildRequires:	valadoc >= 0.2
 BuildRequires:	xz
 Requires(post,postun):	/sbin/ldconfig
