@@ -1,17 +1,18 @@
 # TODO: split some plugins? (gstreamer?)
 #
 # Conditional build:
-%bcond_without	apidocs	# API documentation
+%bcond_without	apidocs		# API documentation
+%bcond_without	tracker2	# tracker2 plugin
 
 Summary:	Rygel - collection of DLNA (UPnP AV) services
 Summary(pl.UTF-8):	Rygel - zbiór usług DLNA (UPnP AV)
 Name:		rygel
-Version:	0.40.1
-Release:	3
+Version:	0.40.2
+Release:	1
 License:	LGPL v2+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/rygel/0.40/%{name}-%{version}.tar.xz
-# Source0-md5:	d86ea1458ee6fda890dec3cfbda94372
+# Source0-md5:	4b25288b23fefd67c5a02ac816b4ebdd
 Patch0:		gtk-doc.patch
 Patch1:		%{name}-pc.patch
 URL:		https://wiki.gnome.org/Projects/Rygel
@@ -37,13 +38,15 @@ BuildRequires:	libunistring-devel
 BuildRequires:	libuuid-devel >= 1.41.3
 BuildRequires:	libxml2-devel >= 1:2.7
 BuildRequires:	libxslt-progs
-BuildRequires:	meson >= 0.50.0
+BuildRequires:	meson >= 0.55.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.752
+BuildRequires:	sed >= 4.0
 BuildRequires:	sqlite3-devel >= 3.5
 BuildRequires:	tar >= 1:1.22
-BuildRequires:	tracker-devel >= 2.0
+%{?with_tracker2:BuildRequires:	tracker-devel >= 2.0}
 BuildRequires:	tracker3-devel >= 3.0
 BuildRequires:	vala >= 2:0.40.10
 BuildRequires:	vala-gupnp >= 1.2.0
@@ -186,6 +189,11 @@ Wtyczka tracker3 dla serwera mediów UPnP/DLNA Rygel
 %patch0 -p1
 %patch1 -p1
 
+%if %{with tracker2}
+# tracker[2] plugin is still present, but not in choices
+%{__sed} -i -e "/'plugins'/ s/]/, 'tracker']/" meson_options.txt
+%endif
+
 %build
 %meson build \
 	--default-library=shared \
@@ -257,10 +265,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/rygel-2.6/plugins/librygel-ruih.so
 %{_libdir}/rygel-2.6/plugins/ruih.plugin
 
+%if %{with tracker2}
 %files plugin-tracker
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/rygel-2.6/plugins/librygel-tracker.so
 %{_libdir}/rygel-2.6/plugins/tracker.plugin
+%endif
 
 %files plugin-tracker3
 %defattr(644,root,root,755)
