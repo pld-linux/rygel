@@ -2,7 +2,6 @@
 #
 # Conditional build:
 %bcond_without	apidocs		# API documentation
-%bcond_without	tracker2	# tracker2 plugin
 
 Summary:	Rygel - collection of DLNA (UPnP AV) services
 Summary(pl.UTF-8):	Rygel - zbiór usług DLNA (UPnP AV)
@@ -43,10 +42,8 @@ BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.752
-BuildRequires:	sed >= 4.0
 BuildRequires:	sqlite3-devel >= 3.5
 BuildRequires:	tar >= 1:1.22
-%{?with_tracker2:BuildRequires:	tracker-devel >= 2.0}
 BuildRequires:	tracker3-devel >= 3.0
 BuildRequires:	vala >= 2:0.53.2
 BuildRequires:	vala-gupnp-av >= 0.14.1
@@ -68,6 +65,7 @@ Requires:	gtk+3 >= 3.22
 Requires:	gupnp-dlna >= 0.9.4
 Requires:	gupnp-dlna-gst >= 0.9.4
 Requires:	systemd-units >= 38
+Obsoletes:	rygel-plugin-tracker < 0.43
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -156,19 +154,6 @@ Plugins for the Rygel UPnP/DLNA media server.
 %description plugins -l pl.UTF-8
 Wtyczki dla serwera mediów UPnP/DLNA Rygel
 
-%package plugin-tracker
-Summary:	tracker plugin for the Rygel media server
-Summary(pl.UTF-8):	Wtyczka tracker dla serwera mediów Rygel
-Group:		X11/Applications
-Requires:	%{name} = %{version}-%{release}
-Requires:	tracker-libs >= 2.0
-
-%description plugin-tracker
-Tracker plugin for the Rygel UPnP/DLNA media server.
-
-%description plugin-tracker -l pl.UTF-8
-Wtyczka tracker dla serwera mediów UPnP/DLNA Rygel
-
 %package plugin-tracker3
 Summary:	tracker3 plugin for the Rygel media server
 Summary(pl.UTF-8):	Wtyczka tracker3 dla serwera mediów Rygel
@@ -185,12 +170,7 @@ Wtyczka tracker3 dla serwera mediów UPnP/DLNA Rygel
 %prep
 %setup -q
 %patch0 -p1
-#patch1 -p1
-
-%if %{with tracker2}
-# tracker[2] plugin is still present, but not in choices
-%{__sed} -i -e "/'plugins'/ s/]/, 'tracker']/" meson_options.txt
-%endif
+%patch1 -p1
 
 %build
 %meson build \
@@ -262,13 +242,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/rygel-2.8/plugins/playbin.plugin
 %attr(755,root,root) %{_libdir}/rygel-2.8/plugins/librygel-ruih.so
 %{_libdir}/rygel-2.8/plugins/ruih.plugin
-
-%if %{with tracker2}
-%files plugin-tracker
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/rygel-2.8/plugins/librygel-tracker.so
-%{_libdir}/rygel-2.8/plugins/tracker.plugin
-%endif
 
 %files plugin-tracker3
 %defattr(644,root,root,755)
