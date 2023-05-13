@@ -1,48 +1,49 @@
---- rygel-0.38.3/rygel-core-2.6.pc.in.orig	2018-11-07 22:18:39.000000000 +0100
-+++ rygel-0.38.3/rygel-core-2.6.pc.in	2020-05-12 18:32:01.502452242 +0200
-@@ -11,5 +11,5 @@
+--- rygel-0.42.3/rygel-core-2.8.pc.in.orig	2023-05-13 14:24:42.899813614 +0200
++++ rygel-0.42.3/rygel-core-2.8.pc.in	2023-05-13 14:24:45.946463776 +0200
+@@ -11,5 +11,5 @@ Description: GNOME (Mobile) UPnP/DLNA Me
  Version: @VERSION@
- Libs: -L${libdir} -lrygel-core-2.6
- Cflags: -I${includedir}/rygel-2.6
+ Libs: -L${libdir} -lrygel-core-2.8
+ Cflags: -I${includedir}/rygel-2.8
 -Requires: gupnp-av-1.0 gee-0.8
 -Requires.Private: gmodule-2.0
-+Requires: gupnp-av-1.0 gupnp-1.2 libxml-2.0 gee-0.8 glib-2.0
++Requires: gupnp-av-1.0 gee-0.8 libxml-2.0 glib-2.0
 +Requires.Private: gmodule-2.0 gio-2.0
---- rygel-0.38.3/rygel-renderer-2.6.pc.in.orig	2018-11-07 22:18:39.000000000 +0100
-+++ rygel-0.38.3/rygel-renderer-2.6.pc.in	2020-05-12 18:35:49.927881421 +0200
-@@ -8,5 +8,5 @@
+--- rygel-0.42.3/rygel-renderer-2.8.pc.in.orig	2023-04-22 20:51:10.000000000 +0200
++++ rygel-0.42.3/rygel-renderer-2.8.pc.in	2023-05-13 15:02:37.807489382 +0200
+@@ -8,5 +8,5 @@ Description: GNOME (Mobile) UPnP/DLNA Me
  Version: @VERSION@
- Libs: -L${libdir} -lrygel-renderer-2.6
- Cflags: -I${includedir}/rygel-2.6
--Requires: gupnp-av-1.0 gee-0.8 rygel-core-2.6
-+Requires: gupnp-av-1.0 gee-0.8 rygel-core-2.6 glib-2.0
- Requires.Private: gmodule-2.0
---- rygel-0.38.3/rygel-renderer-gst-2.6.pc.in.orig	2018-11-07 22:18:39.000000000 +0100
-+++ rygel-0.38.3/rygel-renderer-gst-2.6.pc.in	2020-05-12 18:37:07.664126955 +0200
-@@ -8,5 +8,5 @@
- Version: @VERSION@
- Libs: -L${libdir} -lrygel-renderer-gst-2.6
- Cflags: -I${includedir}/rygel-2.6
--Requires: gupnp-av-1.0 gee-0.8 gstreamer-1.0 rygel-core-2.6
-+Requires: gupnp-av-1.0 gstreamer-1.0 rygel-core-2.6 glib-2.0
- Requires.Private: gmodule-2.0
---- rygel-0.38.3/rygel-ruih-2.0.pc.in.orig	2018-11-07 22:18:39.000000000 +0100
-+++ rygel-0.38.3/rygel-ruih-2.0.pc.in	2020-05-12 18:38:09.673791019 +0200
-@@ -8,5 +8,5 @@
- Version: @VERSION@
- Libs: -L${libdir} -lrygel-ruih-2.0
- Cflags: -I${includedir}/rygel-2.2
--Requires: gupnp-av-1.0 gee-0.8 rygel-core-2.6
+ Libs: -L${libdir} -lrygel-renderer-2.8
+ Cflags: -I${includedir}/rygel-2.8
+-Requires: gupnp-av-1.0 gee-0.8 rygel-core-2.8
 -Requires.Private: gmodule-2.0
-+Requires: gupnp-av-1.0 gee-0.8 rygel-core-2.6 libxml-2.0 glib-2.0
++Requires: gupnp-av-1.0 rygel-core-2.8 glib-2.0
++Requires.Private: gmodule-2.0 gee-0.8
+--- rygel-0.42.3/rygel-renderer-gst-2.8.pc.in.orig	2023-04-22 20:51:10.000000000 +0200
++++ rygel-0.42.3/rygel-renderer-gst-2.8.pc.in	2023-05-13 15:04:56.363405427 +0200
+@@ -8,5 +8,5 @@ Description: GNOME (Mobile) UPnP/DLNA Me
+ Version: @VERSION@
+ Libs: -L${libdir} -lrygel-renderer-gst-2.8
+ Cflags: -I${includedir}/rygel-2.8
+-Requires: gupnp-av-1.0 gee-0.8 gstreamer-1.0 rygel-core-2.8
++Requires: gupnp-av-1.0 gstreamer-1.0 rygel-core-2.8 glib-2.0
+ Requires.Private: gmodule-2.0
+--- rygel-0.42.3/rygel-ruih-2.8.pc.in.orig	2023-04-22 20:51:10.000000000 +0200
++++ rygel-0.42.3/rygel-ruih-2.8.pc.in	2023-05-13 15:24:29.463716864 +0200
+@@ -8,5 +8,5 @@ Description: GNOME (Mobile) UPnP/DLNA RU
+ Version: @VERSION@
+ Libs: -L${libdir} -lrygel-ruih-2.8
+ Cflags: -I${includedir}/rygel-2.8
+-Requires: gupnp-av-1.0 gee-0.8 rygel-core-2.8
+-Requires.Private: gmodule-2.0
++Requires: gupnp-av-1.0 gee-0.8 rygel-core-2.8 libxml-2.0 glib-2.0
 +Requires.Private: gmodule-2.0 gio-2.0
---- rygel-0.38.3/rygel-server-2.6.pc.in.orig	2018-11-07 22:18:39.000000000 +0100
-+++ rygel-0.38.3/rygel-server-2.6.pc.in	2020-05-12 18:39:38.033312335 +0200
-@@ -11,5 +11,5 @@
+--- rygel-0.42.3/rygel-server-2.8.pc.in.orig	2023-04-22 20:51:10.000000000 +0200
++++ rygel-0.42.3/rygel-server-2.8.pc.in	2023-05-13 15:25:44.736642409 +0200
+@@ -11,5 +11,5 @@ Description: GNOME (Mobile) UPnP/DLNA Me
  Version: @VERSION@
- Libs: -L${libdir} -lrygel-server-2.6
- Cflags: -I${includedir}/rygel-2.6
--Requires: gupnp-av-1.0 gee-0.8 rygel-core-2.6
+ Libs: -L${libdir} -lrygel-server-2.8
+ Cflags: -I${includedir}/rygel-2.8
+-Requires: gupnp-av-1.0 gee-0.8 rygel-core-2.8
 -Requires.Private: gmodule-2.0
-+Requires: gupnp-av-1.0 gupnp-1.2 gee-0.8 rygel-core-2.6 libsoup-2.4 gobject-2.0 glib-2.0
++Requires: gupnp-av-1.0 gupnp-1.6 gee-0.8 rygel-core-2.8 libsoup-3.0 gobject-2.0 glib-2.0
 +Requires.Private: gmodule-2.0 gio-2.0
