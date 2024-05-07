@@ -6,12 +6,12 @@
 Summary:	Rygel - collection of DLNA (UPnP AV) services
 Summary(pl.UTF-8):	Rygel - zbiór usług DLNA (UPnP AV)
 Name:		rygel
-Version:	0.42.5
+Version:	0.42.6
 Release:	1
 License:	LGPL v2+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/rygel/0.42/%{name}-%{version}.tar.xz
-# Source0-md5:	0ad39ff41c61bba25fbc63bde927c2ad
+# Source0-md5:	a60bb585cd0f17408251184ce782c8b8
 Patch0:		gtk-doc.patch
 Patch1:		%{name}-pc.patch
 URL:		https://wiki.gnome.org/Projects/Rygel
