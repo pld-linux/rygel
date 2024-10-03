@@ -6,15 +6,15 @@
 Summary:	Rygel - collection of DLNA (UPnP AV) services
 Summary(pl.UTF-8):	Rygel - zbiór usług DLNA (UPnP AV)
 Name:		rygel
-Version:	0.42.6
+Version:	0.44.0
 Release:	1
 License:	LGPL v2+
 Group:		X11/Applications
-Source0:	https://download.gnome.org/sources/rygel/0.42/%{name}-%{version}.tar.xz
-# Source0-md5:	a60bb585cd0f17408251184ce782c8b8
+Source0:	https://download.gnome.org/sources/rygel/0.44/%{name}-%{version}.tar.xz
+# Source0-md5:	efeb39429e9b4ed3a284640b7af9cb56
 Patch0:		gtk-doc.patch
 Patch1:		%{name}-pc.patch
-URL:		https://wiki.gnome.org/Projects/Rygel
+URL:		https://gnome.pages.gitlab.gnome.org/rygel/
 BuildRequires:	docbook-style-xsl-nons
 BuildRequires:	gdk-pixbuf2-devel >= 2.0
 BuildRequires:	gettext-tools >= 0.19.7
@@ -33,17 +33,18 @@ BuildRequires:	gupnp-dlna-gst-devel >= 0.9.4
 BuildRequires:	gupnp1.6-devel >= 1.5.2
 BuildRequires:	libgee-devel >= 0.8.0
 BuildRequires:	libmediaart2-devel >= 0.7.0
-BuildRequires:	libsoup3-devel >= 2.44.0
+BuildRequires:	libsoup3-devel >= 3.2.0
 BuildRequires:	libunistring-devel
 BuildRequires:	libxml2-devel >= 1:2.7
 BuildRequires:	libxslt-progs
-BuildRequires:	meson >= 0.58.0
+BuildRequires:	meson >= 0.59.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRequires:	sqlite3-devel >= 3.5
 BuildRequires:	tar >= 1:1.22
+# tinysparql now, but rygel still uses tracker names
 BuildRequires:	tracker3-devel >= 3.0
 BuildRequires:	vala >= 2:0.53.2
 BuildRequires:	vala-gupnp-av >= 0.14.1
@@ -86,7 +87,7 @@ Requires:	gupnp-av >= 0.14.1
 Requires:	gupnp1.6 >= 1.5.2
 Requires:	libgee >= 0.8.0
 Requires:	libmediaart2 >= 0.7.0
-Requires:	libsoup3 >= 2.44.0
+Requires:	libsoup3 >= 3.2.0
 Requires:	libxml2 >= 1:2.7
 Requires:	sqlite3 >= 3.5
 Conflicts:	rygel < 0.32
@@ -232,8 +233,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/rygel-2.8/plugins/external.plugin
 %attr(755,root,root) %{_libdir}/rygel-2.8/plugins/librygel-gst-launch.so
 %{_libdir}/rygel-2.8/plugins/gst-launch.plugin
-%attr(755,root,root) %{_libdir}/rygel-2.8/plugins/librygel-lms.so
-%{_libdir}/rygel-2.8/plugins/lms.plugin
 %attr(755,root,root) %{_libdir}/rygel-2.8/plugins/librygel-media-export.so
 %{_libdir}/rygel-2.8/plugins/media-export.plugin
 %attr(755,root,root) %{_libdir}/rygel-2.8/plugins/librygel-mpris.so
