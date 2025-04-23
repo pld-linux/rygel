@@ -6,12 +6,12 @@
 Summary:	Rygel - collection of DLNA (UPnP AV) services
 Summary(pl.UTF-8):	Rygel - zbiór usług DLNA (UPnP AV)
 Name:		rygel
-Version:	0.44.1
+Version:	0.44.2
 Release:	1
 License:	LGPL v2+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/rygel/0.44/%{name}-%{version}.tar.xz
-# Source0-md5:	6b283ac24e73b5bf69470903e246d8f0
+# Source0-md5:	5e69033bdb56eddf38837b259dddbde2
 Patch0:		gtk-doc.patch
 Patch1:		%{name}-pc.patch
 URL:		https://gnome.pages.gitlab.gnome.org/rygel/
@@ -41,7 +41,7 @@ BuildRequires:	meson >= 0.59.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.752
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	sqlite3-devel >= 3.5
 BuildRequires:	tar >= 1:1.22
 # tinysparql now, but rygel still uses tracker names
@@ -174,18 +174,18 @@ Wtyczka tracker3 dla serwera mediów UPnP/DLNA Rygel
 %patch -P1 -p1
 
 %build
-%meson build \
+%meson \
 	--default-library=shared \
 	%{?with_apidocs:-Dapi-docs=true} \
 	-Dexamples=false \
 	-Dsystemd-user-units-dir=%{systemduserunitdir}
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 %find_lang %{name}
 
